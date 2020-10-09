@@ -7,6 +7,7 @@ pipeline {
         stage('Test') {
             agent { dockerfile true }
             steps {
+                sh 'ls -lahtr'
                 sh 'pytest app/tests/test_api.py'
             }
         }
