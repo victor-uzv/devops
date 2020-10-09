@@ -7,12 +7,7 @@ pipeline {
         stage('Test') {
             agent { dockerfile true }
             steps {
-                sh 'pytest --junit-xml test-reports/results.xml app/tests/test_api.py'
-            }
-            post {
-                always {
-                    junit 'test-reports/results.xml'
-                }
+                sh 'pytest app/tests/test_api.py'
             }
         }
         stage('Deliver') {
