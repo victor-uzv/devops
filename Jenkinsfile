@@ -4,13 +4,6 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-        stage('Build') {
-            agent { dockerfile true }
-            }
-            steps {
-                echo 'Building pytest dockerfile'
-            }
-        }
         stage('Test') {
             agent { dockerfile true }
             steps {
