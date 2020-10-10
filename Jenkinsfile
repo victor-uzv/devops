@@ -6,7 +6,7 @@ pipeline {
         dockerImage = ''
         gcpProjectId = 'victoru'
         gcpClusterName = 'python-app-cluster'
-        gcpLocation = 'europe-west-3'
+        gcpLocation = 'europe-west3'
         gcpCredentialsId = 'victoru'
     }
     agent none
