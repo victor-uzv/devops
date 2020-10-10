@@ -27,7 +27,7 @@ pipeline {
            agent any
            steps {
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build("app", "-f ${WORKSPACE}/app/Dockerfile .") registry + ":$BUILD_NUMBER"
                 }
            }
         }
