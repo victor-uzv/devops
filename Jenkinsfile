@@ -46,13 +46,13 @@ pipeline {
                }
            }
         }
-        stage('Clean up image') {
+        stage('Clean up app image') {
          agent any
          steps {
                 sh "docker rmi $registry:${buildVersion}"
               }
          }
-        stage('Deploy to GKE') {
+        stage('Deploy app to GKE') {
          agent any
          steps {
              step([
