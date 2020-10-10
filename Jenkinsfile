@@ -7,7 +7,7 @@ pipeline {
         gcpProjectId = 'victoru'
         gcpClusterName = 'python-app-cluster'
         gcpLocation = 'europe-west3'
-        gcpCredentialsId = 'victoru'
+        gcpCredentialsId = 'victorusa'
     }
     agent none
     options {
