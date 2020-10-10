@@ -30,15 +30,17 @@ pipeline {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
            }
+        }
         stage('Deploy app image to dockerhub') {
-          agent any
-          steps {
+           agent any
+           steps {
                script {
                     docker.withRegistry( '', registryCredentials) {
                         dockerImage.push()
                     }
                }
-          }
+           }
+        }
         stage('Clean up') {
          agent any
          steps {
