@@ -17,7 +17,7 @@ pipeline {
                     def userInput = input(
                         message: 'Image tag for python-app required:',
                         parameters: [
-                            string(defaultValue: 'None',
+                            string(defaultValue: 'latest',
                                    description: 'python-app:tag',
                                    name: 'Tag')
                         ]
