@@ -8,9 +8,9 @@ spec:
   type: NodePort
   ports:
   - port: 5000
-    targetPort: 5000
+    targetPort: 80
     protocol: TCP
-    name: flask
+    name: http
 
 ---
 apiVersion: apps/v1
