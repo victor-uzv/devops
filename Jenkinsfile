@@ -2,6 +2,7 @@ pipeline {
     environment {
         registry = "deadlike/app-python"
         registryCredentials = 'deadlike'
+        buildVersion = 'latest'
         dockerImage = ''
     }
     agent none
@@ -27,7 +28,7 @@ pipeline {
            agent any
            steps {
                 script {
-                    dockerImage = docker.build(registry + ":latest", "-f ${WORKSPACE}/app/Dockerfile .")
+                    dockerImage = docker.build(registry + ":${buildVersion}", "-f ${WORKSPACE}/app/Dockerfile .")
                 }
            }
         }
@@ -44,7 +45,7 @@ pipeline {
         stage('Clean up') {
          agent any
          steps {
-                sh "docker rmi $registry:$BUILD_NUMBER"
+                sh "docker rmi $registry:${buildVersion}"
               }
          }
     }
