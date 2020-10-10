@@ -14,7 +14,6 @@ pipeline {
         stage('Clean up app image') {
          steps {
                 script {
-                    def inputTag = 'latest'
                     def userInput = input(
                         message: 'Image tag for python-app required:',
                         parameters: [
@@ -23,10 +22,7 @@ pipeline {
                                    name: 'Tag')
                         ]
                     )
-                    inputTag = usrInput.Tag?:''
-                    if("$inputTag" == ''){
-                        currentBuild.result = 'FAILURE'
-                    }
+                    echo $userInput
                 }
          }
         }
