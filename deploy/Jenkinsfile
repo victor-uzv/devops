@@ -1,0 +1,45 @@
+pipeline {
+    environment {
+        buildVersion = 'latest'
+        gcpProjectId = 'victoru'
+        gcpClusterName = 'python-app-cluster'
+        gcpLocation = 'europe-west3'
+        gcpCredentialsId = 'victorusa'
+    }
+    options {
+        skipStagesAfterUnstable()
+    }
+    agent any
+    stages {
+        stage('Clean up app image') {
+         steps {
+                script{
+                    def inputTag
+                    def userInput = input(
+                        message: 'Image tag for python-app required:'
+                        parameters: [
+                            string(defaultValue: 'None'
+                                   description: 'python-app:tag'
+                                   name: 'Tag')
+                        ]
+                    )
+                    inputTag = usrInput.Tag?:''
+                    if("$inputTag" == ''){
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+         }
+        stage('Deploy app to GKE') {
+         steps {
+             step([
+             $class: 'KubernetesEngineBuilder',
+             projectId:  gcpProjectId,
+             clusterName: gcpClusterName,
+             location: gcpLocation,
+             manifestPattern: 'manifest.yaml',
+             credentialsId: gcpCredentialsId,
+             verifyDeployments: true])
+            }
+        }
+    }
+}
