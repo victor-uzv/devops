@@ -11,7 +11,7 @@ pipeline {
     }
     agent any
     stages {
-        stage('Clean up app image') {
+        stage('Get python-app container tag from user input') {
          steps {
                 script {
                     def userInput = input(
