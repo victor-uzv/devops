@@ -4,6 +4,10 @@ pipeline {
         registryCredentials = 'deadlike'
         buildVersion = 'latest'
         dockerImage = ''
+        gcpProjectId = 'victoru'
+        gcpClusterName = 'python-app-cluster'
+        gcpLocation = 'europe-west-3'
+        gcpCredentialsId = 'victoru'
     }
     agent none
     options {
@@ -42,11 +46,24 @@ pipeline {
                }
            }
         }
-        stage('Clean up') {
+        stage('Clean up image') {
          agent any
          steps {
                 sh "docker rmi $registry:${buildVersion}"
               }
          }
+        stage('Deploy to GKE') {
+         agent any
+         steps {
+             step([
+             $class: 'KubernetesEngineBuilder',
+             projectId:  gcpProjectId,
+             clusterName: gcpClusterName,
+             location: gcpLocation,
+             manifestPattern: 'manifest.yaml',
+             credentialsId: gcpCredentialsId,
+             verifyDeployments: true])
+            }
+        }
     }
 }
