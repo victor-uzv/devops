@@ -22,7 +22,7 @@ pipeline {
                                    name: 'Tag')
                         ]
                     )
-                    echo $userInput
+                    echo '$userInput'
                 }
          }
         }
