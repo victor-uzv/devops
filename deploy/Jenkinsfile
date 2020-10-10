@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Clean up app image') {
          steps {
-                script{
+                script {
                     def inputTag
                     def userInput = input(
                         message: 'Image tag for python-app required:',
@@ -29,6 +29,7 @@ pipeline {
                     }
                 }
          }
+        }
         stage('Deploy app to GKE') {
          steps {
              step([
