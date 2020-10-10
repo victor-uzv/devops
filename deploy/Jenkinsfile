@@ -14,7 +14,7 @@ pipeline {
         stage('Clean up app image') {
          steps {
                 script {
-                    def inputTag
+                    def inputTag = 'latest'
                     def userInput = input(
                         message: 'Image tag for python-app required:',
                         parameters: [
