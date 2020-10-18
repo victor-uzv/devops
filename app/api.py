@@ -20,7 +20,7 @@ def load_creator_helper(timeout: int, arg: int) -> None:
     """
     start_time = time()
     while time() - start_time < timeout:
-        arg ** arg
+        arg * arg
 
 
 def cpu_load_creator(timeout: int) -> None:
