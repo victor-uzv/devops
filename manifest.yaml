@@ -41,19 +41,21 @@ spec:
       imagePullSecrets:
         - name: dockerhub
 ---
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
-apiVersion: autoscaling/v2beta1
 metadata:
   name: api-python
 spec:
-  maxReplicas: 3
-  minReplicas: 2
   scaleTargetRef:
-    apiVersion: app/v1
+    apiVersion: apps/v1
     kind: Deployment
     name: api-python
+  minReplicas: 2
+  maxReplicas: 3
   metrics:
   - type: Resource
     resource:
       name: cpu
-      targetAverageUtilization: 20
+      target:
+        type: Utilization
+        averageUtilization: 50
