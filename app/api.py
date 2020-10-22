@@ -30,7 +30,7 @@ def cpu_load_creator(timeout: int) -> None:
     :param timeout: int - after how long each worker should time out
     :return: None
     """
-    processor_core_count = cpu_count()
+    processor_core_count = cpu_count() * 2
     with ProcessPoolExecutor(max_workers=processor_core_count) as executor:
         # partial is used to set the timeout arg of the load_creator_helper function
         executor.map(partial(load_creator_helper, timeout), range(processor_core_count))
