@@ -46,9 +46,10 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: api-python
 spec:
-  behaviour:
-    scaleDown:
-      stabilizationWindowSeconds: 60
+  # Version 1.18
+  # behaviour:
+  #   scaleDown:
+  #     stabilizationWindowSeconds: 60
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
