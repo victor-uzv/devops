@@ -35,9 +35,9 @@ spec:
         - containerPort: 5000
         resources:
           limits:
-            cpu: 500m
+            cpu: 1000m
           requests:
-            cpu: 200m
+            cpu: 500m
       imagePullSecrets:
         - name: dockerhub
 ---
@@ -58,4 +58,4 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 50
+        averageUtilization: 70
